@@ -1,0 +1,19 @@
+/*  mine  */
+.dark{
+  background-color: #242424     ;
+}
+.pink{
+  background-color: #81224f;
+}
+.grey{
+  background-color: #203f4f;
+}
+
+.app{
+  /* border: 2px solid red; */
+  min-height: 100vh;
+  min-width: 100vw;
+  margin-top: -34px;
+  /* ahdi haydat lina dak lmassafa lbayda li kant lfoo9 w sababha kan hta hou lcolor scheme li kayna f root */
+  /* w dak min f height w width: haydat lina dk scrolat li kno zaydin ; */
+}
