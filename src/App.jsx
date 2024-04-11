@@ -62,7 +62,7 @@ const setage = (eo) => { dispatch({ type: "ChangeAge", newValue:  100}) ,documen
       {/* <button onClick={(eo) => {eo.target.parentElement.classList.toggle("dark")}} >toggle mode</button> */}
       <br /> <br /> 
       <button onClick={() => {allData.clss == "" ? dispatch({ type: "ChangeClass", newValue: "dark" }) : dispatch({ type: "ChangeClass", newValue: "" })}}> toggle mode </button> 
-
+      {/* kona nqeedro ndiro had if hta f newValue ali hassan darha, ms machi mochkil hana jarebt tariqa li f bali */}
 
 
         <label className="theme-switch" onChange={() => { allData.clss == "" ? dispatch({ type: "ChangeClass", newValue: "dark" }) : dispatch({ type: "ChangeClass", newValue: "" })}}>
@@ -71,7 +71,7 @@ const setage = (eo) => { dispatch({ type: "ChangeAge", newValue:  100}) ,documen
       type="checkbox"
     />
     <div className="theme-switch__container">
-      <div className="theme-switch__clouds" />
+      <div className="theme-switch__clouds" /> 
       <div className="theme-switch__stars-container">
         <svg
           fill="none"
@@ -98,9 +98,6 @@ const setage = (eo) => { dispatch({ type: "ChangeAge", newValue:  100}) ,documen
     </div>
   </label>
 </div>
-
-
-
 
 
   )
