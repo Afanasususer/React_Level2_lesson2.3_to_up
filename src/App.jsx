@@ -1,48 +1,71 @@
 
 import './App.css'
 import './mycss.css'
-import { useState } from "react";
+import { useReducer } from "react";
+
+
+
+
+const currentValue = {name : "abdelouahab" , age : 22 , counter : 0, clss : "" }
+
+const reducer = (state, action) => {
+  switch (action.type) {
+
+    case "ChangeName":
+      return { ...state, name: action.newValue };
+
+    case "ChangeAge":
+      return { ...state, age: action.newValue };
+
+    case "ChangeCounter":
+      return { ...state, counter: action.newValue };
+
+    case "ChangeClass":
+      return { ...state, clss: action.newValue };
+
+    default:
+      return state;
+  }
+};
+
+
 
 function App() {
-const [person, setPerson] = useState("abdelouahab");
-const [age, setAge] = useState(22);
-let [counter, setCounter] = useState(0);
-let [backgroundColor, setbackgroundColor] = useState("");
-// let [darkmode, setdarkmode] = useState(false);
+  const [allData, dispatch] = useReducer(reducer, currentValue)
  
 
 
 
 
-const setage = (eo) => { setAge(100) ,document.getElementById("age").style.color = "pink", eo.target.style.backgroundColor = "green"}
+const setage = (eo) => { dispatch({ type: "ChangeAge", newValue:  100}) ,document.getElementById("age").style.color = "pink", eo.target.style.backgroundColor = "green"}
 
   return (
-    <div className = {`app ${backgroundColor}`} >
-      <h1 id='txt'>Hi my name is {person}</h1> 
-      <button id='btn1' onClick={(eo) => {setPerson("SAMADI"), document.getElementById("txt").style.color = "pink" ,eo.target.style.backgroundColor = "green" }}>change name</button>
+    <div className = {`app ${allData.clss}`} >
+      <h1 id='txt'>Hi my name is {allData.name}</h1> 
+      <button id='btn1' onClick={(eo) => { dispatch({ type: "ChangeName", newValue: "samadi" }) ,document.getElementById("txt").style.color = "pink" ,eo.target.style.backgroundColor = "green" }}>change name</button>
 
 
-      <h1 id='age'>Hi my age is {age}</h1> 
+      <h1 id='age'>Hi my age is {allData.age}</h1> 
       <button id='btn2' onClick={setage}>change age</button>
 
       <br /> <br />
 
 
-      <button id='btn3' onClick={(eo) => {setCounter(counter+1), eo.target.style.backgroundColor = "green"}}>counter is {counter}</button>
+      <button id='btn3' onClick={(eo) => { dispatch({ type: "ChangeCounter", newValue: allData.counter+1 } ,eo.target.style.backgroundColor = "green")}}>counter is {allData.counter}</button>
       <br /> <br /> <br />
 
-      <button style={{marginRight : "20px"}} onClick={() => { setbackgroundColor("dark")}}> dark </button>    
-      <button style={{marginRight : "20px"}} onClick={() => {setbackgroundColor("grey")}}> grey </button>    
-      <button style={{marginRight : "20px"}} onClick={() => {setbackgroundColor("pink")}}> pink </button>    
-      <button                                onClick={() => {setbackgroundColor("")}}> light </button>    
+      <button style={{marginRight : "20px"}} onClick={() => {dispatch({ type: "ChangeClass", newValue: "dark" }) }}> dark </button>    
+      <button style={{marginRight : "20px"}} onClick={() => {dispatch({ type: "ChangeClass", newValue: "grey" })}}> grey </button>    
+      <button style={{marginRight : "20px"}} onClick={() => {dispatch({ type: "ChangeClass", newValue: "pink" })}}> pink </button>    
+      <button                                onClick={() => {dispatch({ type: "ChangeClass", newValue: "light" })}}> light </button>    
       <br />
       {/* <button onClick={(eo) => {eo.target.parentElement.classList.toggle("dark")}} >toggle mode</button> */}
       <br /> <br /> 
-      <button onClick={() => {setbackgroundColor(backgroundColor == "" ? "dark" : "") }}> toggle mode </button> 
+      <button onClick={() => {allData.clss == "" ? dispatch({ type: "ChangeClass", newValue: "dark" }) : dispatch({ type: "ChangeClass", newValue: "" })}}> toggle mode </button> 
 
 
 
-        <label className="theme-switch" onChange={() => {setbackgroundColor(backgroundColor == "" ? "dark" : "") }}>
+        <label className="theme-switch" onChange={() => { allData.clss == "" ? dispatch({ type: "ChangeClass", newValue: "dark" }) : dispatch({ type: "ChangeClass", newValue: "" })}}>
     <input
       className="theme-switch__checkbox"
       type="checkbox"
