@@ -1,71 +1,45 @@
+import {useContext } from "react";
+ import DataContext from "./context/Datacontext";
+import { Link } from "react-router-dom";
 
 import './App.css'
 import './mycss.css'
-import { useReducer } from "react";
 
 
+function App() {  
+  const {name, changeName, clss, age, changeAge, counter,changeCounter,changeTheme } = useContext(DataContext);
 
 
-const currentValue = {name : "abdelouahab" , age : 22 , counter : 0, clss : "" }
-
-const reducer = (state, action) => {
-  switch (action.type) {
-
-    case "ChangeName":
-      return { ...state, name: action.newValue };
-
-    case "ChangeAge":
-      return { ...state, age: action.newValue };
-
-    case "ChangeCounter":
-      return { ...state, counter: action.newValue };
-
-    case "ChangeClass":
-      return { ...state, clss: action.newValue };
-
-    default:
-      return state;
-  }
-};
-
-
-
-function App() {
-  const [allData, dispatch] = useReducer(reducer, currentValue)
- 
-
-
-
-
-const setage = (eo) => { dispatch({ type: "ChangeAge", newValue:  100}) ,document.getElementById("age").style.color = "pink", eo.target.style.backgroundColor = "green"}
 
   return (
-    <div className = {`app ${allData.clss}`} >
-      <h1 id='txt'>Hi my name is {allData.name}</h1> 
-      <button id='btn1' onClick={(eo) => { dispatch({ type: "ChangeName", newValue: "samadi" }) ,document.getElementById("txt").style.color = "pink" ,eo.target.style.backgroundColor = "green" }}>change name</button>
-
-
-      <h1 id='age'>Hi my age is {allData.age}</h1> 
-      <button id='btn2' onClick={setage}>change age</button>
+    <div className={`app ${clss}`}>
+      <h1 id='txt'>Hi my name is {name}</h1> 
+      <button id='btn1' onClick={(eo) => { changeName("ELRAYEK") , document.getElementById("txt").style.color = "pink" ,eo.target.style.backgroundColor = "red" }}>change name</button>
+      <br /> <br />
+      {/* <a style={{color : "black"}} href="./Pages/page1">click herebto go to page 2</a> hadi masal7ach fiha problem*/}
+      <Link style={{color : "black"}} to="./Pages/page1">click herebto go to page 2</Link>
+      
+      <h1 id='age'>Hi my age is {age}</h1> 
+      <button id='btn2' onClick={() => { changeAge(25) }}>change age</button>
 
       <br /> <br />
 
 
-      <button id='btn3' onClick={(eo) => { dispatch({ type: "ChangeCounter", newValue: allData.counter+1 } ,eo.target.style.backgroundColor = "green")}}>counter is {allData.counter}</button>
+      <button id='btn3' onClick={() => {changeCounter(counter+1)}}>counter is {counter}</button>
       <br /> <br /> <br />
 
-      <button style={{marginRight : "20px"}} onClick={() => {dispatch({ type: "ChangeClass", newValue: "dark" }) }}> dark </button>    
-      <button style={{marginRight : "20px"}} onClick={() => {dispatch({ type: "ChangeClass", newValue: "grey" })}}> grey </button>    
-      <button style={{marginRight : "20px"}} onClick={() => {dispatch({ type: "ChangeClass", newValue: "pink" })}}> pink </button>    
-      <button                                onClick={() => {dispatch({ type: "ChangeClass", newValue: "light" })}}> light </button>    
+      <button onClick={() => {    changeTheme("dark")  }} style={{marginRight : "20px"}} > dark </button>    
+      <button onClick={() => {    changeTheme("grey") }} style={{marginRight : "20px"}} > grey </button>    
+      <button onClick={() => {    changeTheme("pink") }} style={{marginRight : "20px"}} > pink </button>    
+      <button onClick={() => {    changeTheme("light")  }}                                > light </button>    
       <br />
       {/* <button onClick={(eo) => {eo.target.parentElement.classList.toggle("dark")}} >toggle mode</button> */}
       <br /> <br /> 
-      <button onClick={() => {allData.clss == "" ? dispatch({ type: "ChangeClass", newValue: "dark" }) : dispatch({ type: "ChangeClass", newValue: "" })}}> toggle mode </button> 
+      <button onClick={() => { changeTheme(clss == "" ? "dark" : "") }}> toggle mode </button> 
       {/* kona nqeedro ndiro had if hta f newValue ali hassan darha, ms machi mochkil hana jarebt tariqa li f bali */}
+    
 
-
-        <label className="theme-switch" onChange={() => { allData.clss == "" ? dispatch({ type: "ChangeClass", newValue: "dark" }) : dispatch({ type: "ChangeClass", newValue: "" })}}>
+        <label className="theme-switch" onChange={() => { changeTheme(clss == "" ? "dark" : "") }}>
     <input
       className="theme-switch__checkbox"
       type="checkbox"
@@ -91,7 +65,7 @@ const setage = (eo) => { dispatch({ type: "ChangeAge", newValue:  100}) ,documen
           <div className="theme-switch__moon">
             <div className="theme-switch__spot" />
             <div className="theme-switch__spot" />
-            <div className="theme-switch__spot" />
+            <div className="theme-switch__spot" />  
           </div>
         </div>
       </div>
